@@ -1,4 +1,5 @@
 ### Config Database
+#### create /common/config/main-local.php
 ```
 <?php
 
