@@ -75,15 +75,16 @@ class Apple extends ActiveRecord
         ];
     }
 	
-	public function generate()
+	public function generate():bool
 	{		
 		$this->color			=	self::AVAILABLE_COLORS[array_rand(self::AVAILABLE_COLORS)];
 		$this->weight_left		=	100;
 		$curTime				=	time();
 		$this->created_at		=	rand($curTime,$curTime+604800);
+		return $this->save();
 	}
 	
-	public function getState()
+	public function getState():string
 	{
 		if ($this->fall_at)
 		{

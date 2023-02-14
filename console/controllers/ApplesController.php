@@ -18,8 +18,7 @@ class ApplesController extends Controller
 		for ($i=0;$i<27;$i++)
 		{
 			$apple=new Apple();
-			$apple->generate();
-			if ($apple->save())
+			if ($apple->generate())
 			{
 				$appleCreatedCount++;
 			}
