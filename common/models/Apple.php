@@ -87,16 +87,16 @@ class Apple extends ActiveRecord
 	{
 		if ($this->fall_at)
 		{
+			if ($this->weight_left==0)
+			{
+				return self::STATE_EATED;
+			}
+			
 			if (time()>($this->fall_at+self::CORRUPT_TIME))
 			{
 				return self::STATE_CORRUPTED;
 			}
 			return self::STATE_ON_GROUND;
-		}
-		
-		if ($this->weight_left==0)
-		{
-			return self::STATE_EATED;
 		}
 		
 		return self::STATE_ON_TREE;
