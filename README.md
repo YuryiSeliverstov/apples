@@ -1,3 +1,7 @@
+### Frontend/Backend Hosts
+apples-frontend.local
+apples-backend.local
+
 ### Config Database
 /common/config/main-local.php
 ```
