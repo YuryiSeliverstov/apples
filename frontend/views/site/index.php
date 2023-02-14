@@ -10,7 +10,7 @@ $this->title = 'Apples Problem';
         <div class="row">
 			<?php foreach ($apples as $k=>$apple):?>
 			
-            <div class="col-md-2" style="margin:6px">
+            <div class="col-md-3" style="margin:6px">
 			<?php $form = ActiveForm::begin(); ?>
 				<?= $form->field($apple, 'id')->hiddenInput()->label(false) ?>
                 <h2>#<?=$apple->id?> Apple <?=$apple->color?></h2>
@@ -18,9 +18,7 @@ $this->title = 'Apples Problem';
 				<p>Size: <?=$apple->size?>
 				<p>Weight Left / Eat Available: <?=$apple->weight_left?>%
 				<p>Created At: <?=date('d.m.Y H:i:s',$apple->created_at)?></p>
-				<?php if ($apple->fall_at):?>
-                <p>Fall At: <?=date('d.m.Y H:i:s',$apple->fall_at)?></p>
-				<?php endif?>
+                <p>Fall At: <?php if ($apple->fall_at):?><?=date('d.m.Y H:i:s',$apple->fall_at)?><?php endif?></p>
 				<select name="action">
 					<option value="fall">Fall</option>
 					<option value="eat">Eat</option>
