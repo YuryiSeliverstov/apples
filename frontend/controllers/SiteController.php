@@ -15,6 +15,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Apple;
 
 /**
  * Site controller
@@ -70,7 +71,41 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+		if (Yii::$app->request->isPost)
+		{
+			$post=Yii::$app->request->post();
+			
+			if (!isset($post['action']))
+			{
+				Yii::$app->session->addFlash('error', 'Action not Specified');
+			}
+			
+			if ($apple=Apple::findOne($post['Apple']['id']))
+			{
+				switch ($post['action'])
+				{
+					case 'eat':
+						$apple->eat($post['amount']);
+						break;
+					case 'fall':
+						$apple->fall();
+						break;
+					case 'delete':
+						$apple->delete();
+						break;	
+				}
+				
+				if ($apple->errors)
+				{
+					Yii::$app->session->addFlash('error', $apple->printErrors);
+				}
+			}
+			else
+			{
+				Yii::$app->session->addFlash('error', 'Apple Not Found');
+			}
+		}
+        return $this->render('index',['apples'=>Apple::find()->all()]);
     }
 
     /**

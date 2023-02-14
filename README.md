@@ -52,11 +52,19 @@ return [
 
 ### Init
 ```
-php yii init
+php init
 ```
 
+```
+php yii migrate
+```
 
 ### Add User
 ```
 php yii users/add
+```
+
+### Generate Apples
+```
+php yii apples/generate
 ```
