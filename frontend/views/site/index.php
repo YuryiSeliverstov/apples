@@ -7,6 +7,15 @@ $this->title = 'Apples Problem';
 ?>
 <div class="site-index">
     <div class="body-content">
+		<div class="row">
+			<div class="col-md-12" style="margin:6px">
+				<?php $form = ActiveForm::begin(['action' => ['site/generate']]); ?>
+				<div class="form-group">
+						<?= Html::submitButton('Generate', ['class' => 'btn btn-warning']) ?>
+				</div>
+				<?php ActiveForm::end(); ?>	
+			</div>
+		</div>
         <div class="row">
 			<?php foreach ($apples as $k=>$apple):?>
 			

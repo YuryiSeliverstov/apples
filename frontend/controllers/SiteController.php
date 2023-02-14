@@ -30,10 +30,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout','index'],
+                'only' => ['logout','index','generate'],
                 'rules' => [
                     [
-                        'actions' => ['logout','index'],
+                        'actions' => ['logout','index','generate'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -107,6 +107,22 @@ class SiteController extends Controller
 		}
         return $this->render('index',['apples'=>Apple::find()->all()]);
     }
+	
+	public function actionGenerate()
+	{
+		Yii::$app->db->createCommand('TRUNCATE '.Apple::tableName())->execute();
+		$genCount=0;
+		for ($i=0;$i<rand(1,27);$i++)
+		{
+			$apple=new Apple();
+			if ($apple->generate())
+			{
+				$genCount++;
+			}
+		}
+		Yii::$app->session->addFlash('warning', 'Apples Created='.$genCount);
+		return $this->redirect('/');
+	}
 
     /**
      * Logs in a user.
